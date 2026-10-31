@@ -8,11 +8,21 @@ Commit: ab4bf2a6dc183c2444968dc00c94da7b5d9637b2
 Message: Add MM6 Chinese font bootstrap and DBCS validation
 Working tree after commit: clean
 
+Packaging commit
+---------------
+Repository: D:\键位\out\MM6_zh_CN_GrayFace
+Commit: 5e1f4db8dc32abdc84c3f5fdceef9e0dd322fe52
+Message: Restore full Chinese MM6 resource coverage
+Working tree after commit: clean
+
 Original installation backup
 ----------------------------
 D:\键位\backups\MM6-before-compat-20261031-080833
 Includes MM6.exe, configuration, patch DLLs, data/icons.lod, data/games.lod,
 Sounds\Audio.snd, and Saves. File hashes are recorded in manifest.json.
+
+Additional backup before restoring full Chinese coverage:
+D:\键位\backups\MM6-before-i18n-fix-20261031-142343
 
 Runtime verification
 --------------------
@@ -21,6 +31,8 @@ Runtime verification
 - Chinese load dialog and Chinese in-game text verified.
 - WASD movement, A/D strafing, mouse turning and viewport-centered cursor verified.
 - Installer tested separately before the original installation.
+- Disabled English override archives; the original full-Chinese icons.lod and
+  games.lod are active, including old quest notes and Chinese event scripts.
 
 Offline verification
 --------------------
@@ -30,6 +42,6 @@ Offline verification
 
 Configuration notes
 -------------------
-- NoIntro=1 skips the startup movie for faster loading.
+- NoIntro=0 preserves the original startup behavior.
 - RUNASADMIN compatibility flags are preserved.
 - The mouse is centered in the 3D viewport, not in the outer window rectangle.
