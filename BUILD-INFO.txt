@@ -33,6 +33,8 @@ Runtime verification
 - Installer tested separately before the original installation.
 - Disabled English override archives; the original full-Chinese icons.lod and
   games.lod are active, including old quest notes and Chinese event scripts.
+- god(), mana(), nocd() and buff(): 151 real-scene assertions passed with
+  zero failures, including all 23 buffs and unchanged Condition fields.
 
 Offline verification
 --------------------
