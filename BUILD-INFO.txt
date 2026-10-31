@@ -1,0 +1,35 @@
+Build and verification information
+================================
+
+Source commit
+-------------
+Repository: D:\键位\mm678-i18n-master
+Commit: ab4bf2a6dc183c2444968dc00c94da7b5d9637b2
+Message: Add MM6 Chinese font bootstrap and DBCS validation
+Working tree after commit: clean
+
+Original installation backup
+----------------------------
+D:\键位\backups\MM6-before-compat-20261031-080833
+Includes MM6.exe, configuration, patch DLLs, data/icons.lod, data/games.lod,
+Sounds\Audio.snd, and Saves. File hashes are recorded in manifest.json.
+
+Runtime verification
+--------------------
+- Installed into the original GOG MM6 directory and launched successfully.
+- Reached the actual in-game scene with the compatibility runtime.
+- Chinese load dialog and Chinese in-game text verified.
+- WASD movement, A/D strafing, mouse turning and viewport-centered cursor verified.
+- Installer tested separately before the original installation.
+
+Offline verification
+--------------------
+- 130 DBCS harness checks passed.
+- 45 project unit tests passed.
+- Encoding and .str line-length checks passed.
+
+Configuration notes
+-------------------
+- NoIntro=1 skips the startup movie for faster loading.
+- RUNASADMIN compatibility flags are preserved.
+- The mouse is centered in the 3D viewport, not in the outer window rectangle.

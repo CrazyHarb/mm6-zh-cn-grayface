@@ -1,0 +1,92 @@
+魔法门6：简体中文 + GrayFace 键位/鼠标视角兼容包
+================================================
+
+用途
+----
+保留原版 MM6、简体中文文本/语音和 GrayFace 2.5.7 的 WASD 平移、鼠标视角。
+不使用魔法门678整合版，也不合并或替换两个不同补丁的 mm6.exe。
+
+兼容方式
+--------
+- 使用 GrayFace 的 MM6.exe 和 MM6patch.dll。
+- 保留原版中文 LOD、语音、动画和存档。
+- 使用 MMExtension 的原生 DBCS 渲染器显示简体中文。
+- 启动时通过 MM6 原生字体加载器补齐字体及调色板。
+- 不使用 mm6chupchangekey 的固定偏移键位修改，避免覆盖 GrayFace 键位表。
+- 禁用会覆盖中文的 `00 patch.icons.lod`、`10 LocZHCN.icons.lod` 和
+  `00 patch.games.lod`，避免英文任务、物品和事件脚本混用；详见
+  `COMPAT-NOTES.md`。
+
+安装
+----
+1. 将整个 MM6_zh_CN_GrayFace 文件夹解压到任意位置。
+2. 运行 install.bat，或在命令行执行：
+   install.bat "D:\gog\GOG Galaxy\Games\Might and Magic 6"
+3. 不带参数时按提示输入 MM6 游戏目录；本机默认目录为：
+   D:\gog\GOG Galaxy\Games\Might and Magic 6
+4. 如系统提示权限不足，请用管理员身份运行 install.bat。
+5. 启动游戏目录中的 MM6.exe。
+
+安装器会先备份 MM6.exe、MM6.ini、mm6lang.ini、MM6patch.dll、
+data\icons.lod、data\games.lod 和 Sounds\Audio.snd 到：
+  游戏目录\Backup-MM6-Compatibility
+
+首次启动时 MMExtension 可能生成数据表，等待完成即可。
+
+默认操作
+--------
+W/S       前进、后退
+A/D       左右平移（不是转身）
+鼠标      转动、仰视、俯视；光标锁定在 3D 视口中心
+CapsLock  开关鼠标视角（也可用鼠标中键）
+Q         武器攻击
+E         施展备用魔法
+F         跳跃
+V         降落
+X         任务
+滚轮      向上/向下飞
+F2        双倍速
+F3        自动前进
+F5        快速保存
+F8        快速读取
+
+“视口中心”是实际 3D 画面区域的中心，不是整个窗口外框的中心。
+进入背包、对话和其他界面时，鼠标会按游戏原有规则释放。
+
+注意
+----
+- 安装后不要重新运行旧的 tosimp_installer\INSTALL.bat，也不要再运行
+  mm6chupchangekey.exe；它们会覆盖或破坏 GrayFace 的可执行文件/键位表。
+- MM6Controls 仅用于以后调整 GrayFace 键位，不能用于中文原版的固定偏移补丁。
+- 本包不包含 dgVoodoo，也不包含游戏本体、完整动画或完整音乐。
+- 原有存档继续使用。验证时使用了 GOG 原版的现有中文存档。
+
+验证
+----
+- DBCS 离线测试：130 项通过。
+- 项目单元测试：45 项通过。
+- 实际 MM6：中文装载界面、存档场景、中文换行均正常。
+- 实际输入：W/A/D 移动与平移、鼠标转向和视口中心锁定均通过。
+
+源码与构建
+----------
+源码快照位于 D:\键位：
+- Misc-master：GrayFace 官方补丁。
+- mm6chup-master、mm6chupchangekey-master：中文补丁及旧键位工具。
+- mm678-i18n-master：翻译、DBCS 渲染器及本次兼容修改。
+- fnt-generator-master：字体生成工具。
+
+修改位于 mm678-i18n-master：
+- assets/scripts_datatables/_common/_all/Scripts/General/FNT_DBCS.lua
+- tools/fnt_dbcs_harness/harness6.lua
+- tools/fnt_dbcs_harness/harness_bdf.lua
+- docs/dev/fonts.md
+- CHANGELOG.md
+
+重新构建中文文件：
+  python -m mm678i18n build --no-release --langs zh_CN --jobs 1
+
+恢复
+----
+从 Backup-MM6-Compatibility 将对应文件复制回游戏目录即可。
+额外新增的 GrayFace、MMExtension 和语言包文件可保留，不会影响原版启动。
