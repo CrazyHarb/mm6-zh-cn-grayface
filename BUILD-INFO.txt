@@ -35,8 +35,9 @@ Runtime verification
   games.lod are active, including old quest notes and Chinese event scripts.
 - god(), mana(), nocd() and buff(): 151 real-scene assertions passed with
   zero failures, including all 23 buffs and unchanged Condition fields.
-- learn() and immune(): 624 live-process assertions passed with zero failures,
-  including 17 skills, 100 spells and all 17 Condition types per player.
+- learn(): all 31 skills and 100 spells verified for all four players;
+  all-skill runtime smoke completed with failures=0.
+- immune(): all 17 Condition types verified per player with zero failures.
 
 Offline verification
 --------------------

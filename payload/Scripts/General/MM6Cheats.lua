@@ -111,36 +111,16 @@ function buff()
 	return report("Full buffs applied for 24 game hours")
 end
 
-local masterSkills = {
-	const.Skills.Staff,
-	const.Skills.Sword,
-	const.Skills.Dagger,
-	const.Skills.Axe,
-	const.Skills.Spear,
-	const.Skills.Bow,
-	const.Skills.Mace,
-	const.Skills.Blaster,
-	const.Skills.Fire,
-	const.Skills.Air,
-	const.Skills.Water,
-	const.Skills.Earth,
-	const.Skills.Spirit,
-	const.Skills.Mind,
-	const.Skills.Body,
-	const.Skills.Light,
-	const.Skills.Dark,
-}
-
 function learn()
 	for _, pl in Party.PlayersArray do
-		for _, skill in ipairs(masterSkills) do
+		for skill = 0, 30 do
 			pl.Skills[skill] = const.Master
 		end
 		for spell = 0, 99 do
 			pl.Spells[spell] = true
 		end
 	end
-	return report("Weapon and magic skills mastered; all spells learned")
+	return report("All skills mastered; all spells learned")
 end
 
 function immune()
