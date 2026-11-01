@@ -16,6 +16,7 @@
 - 禁用会覆盖中文的 `00 patch.icons.lod`、`10 LocZHCN.icons.lod` 和
   `00 patch.games.lod`，避免英文任务、物品和事件脚本混用；详见
   `COMPAT-NOTES.md`。
+- 使用 `FixDecListCount.lua` 防止装饰物计数高半字异常导致进入副本时崩溃。
 
 安装
 ----

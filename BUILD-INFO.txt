@@ -38,6 +38,8 @@ Runtime verification
 - learn(): level 255, all 31 skills and 100 spells verified for all four players;
   CanTrain blocks further training and native HP calculations remain valid.
 - immune(): all 17 Condition types verified per player with zero failures.
+- Forced DecList high-word corruption before entering t1.blv and t2.blv;
+  both maps loaded with the correct count of 230 and failures=0.
 
 Offline verification
 --------------------
