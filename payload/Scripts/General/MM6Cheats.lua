@@ -1,7 +1,7 @@
--- MM6 console cheats: god(), mana(), nocd(), buff()
+-- MM6 console cheats: god(), mana(), nocd(), buff(), learn(), immune()
 -- Toggles last for the current process; they are not written into save files.
 
-local enabled = {hp = false, sp = false, cd = false}
+local enabled = {hp = false, sp = false, cd = false, immune = false}
 
 local function refillHP(pl)
 	pl.HP = pl:GetFullHP()
@@ -9,6 +9,12 @@ end
 
 local function refillSP(pl)
 	pl.SP = pl:GetFullSP()
+end
+
+local function clearConditions(pl)
+	for c = 0, const.Condition.Eradicated do
+		pl.Conditions[c] = 0
+	end
 end
 
 local function report(text)
@@ -105,6 +111,48 @@ function buff()
 	return report("Full buffs applied for 24 game hours")
 end
 
+local masterSkills = {
+	const.Skills.Staff,
+	const.Skills.Sword,
+	const.Skills.Dagger,
+	const.Skills.Axe,
+	const.Skills.Spear,
+	const.Skills.Bow,
+	const.Skills.Mace,
+	const.Skills.Blaster,
+	const.Skills.Fire,
+	const.Skills.Air,
+	const.Skills.Water,
+	const.Skills.Earth,
+	const.Skills.Spirit,
+	const.Skills.Mind,
+	const.Skills.Body,
+	const.Skills.Light,
+	const.Skills.Dark,
+}
+
+function learn()
+	for _, pl in Party.PlayersArray do
+		for _, skill in ipairs(masterSkills) do
+			pl.Skills[skill] = const.Master
+		end
+		for spell = 0, 99 do
+			pl.Spells[spell] = true
+		end
+	end
+	return report("Weapon and magic skills mastered; all spells learned")
+end
+
+function immune()
+	enabled.immune = not enabled.immune
+	if enabled.immune then
+		for _, pl in Party.PlayersArray do
+			clearConditions(pl)
+		end
+	end
+	return report("Negative-condition immunity: "..(enabled.immune and "ON" or "OFF"))
+end
+
 function events.CalcDamageToPlayer(t)
 	if enabled.hp then
 		t.Result = 0
@@ -118,7 +166,7 @@ function events.GetAttackDelay(t)
 end
 
 function events.Tick()
-	if not (enabled.hp or enabled.sp or enabled.cd) then
+	if not (enabled.hp or enabled.sp or enabled.cd or enabled.immune) then
 		return
 	end
 	for _, pl in Party.PlayersArray do
@@ -130,6 +178,9 @@ function events.Tick()
 		end
 		if enabled.cd then
 			pl.RecoveryDelay = 0
+		end
+		if enabled.immune then
+			clearConditions(pl)
 		end
 	end
 

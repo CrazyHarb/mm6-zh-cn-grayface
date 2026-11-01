@@ -40,6 +40,6 @@ echo.
 echo Install complete. Start MM6.exe.
 echo WASD movement, A/D strafe, mouse look. CapsLock or middle mouse toggles mouse look.
 echo F5 quick save, F8 quick load, F2 double speed, F3 autorun.
-echo Ctrl+F1 console: god(), mana(), nocd(), buff().
+echo Ctrl+F1 console: god(), mana(), nocd(), buff(), learn(), immune().
 echo Backup: %BACKUP%
 pause
