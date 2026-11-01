@@ -111,8 +111,13 @@ function buff()
 	return report("Full buffs applied for 24 game hours")
 end
 
+local maxCharacterLevel = 255
+
 function learn()
 	for _, pl in Party.PlayersArray do
+		pl.LevelBase = maxCharacterLevel
+		pl.LevelBonus = 0
+		pl.Experience = 0
 		for skill = 0, 30 do
 			pl.Skills[skill] = const.Master
 		end
@@ -120,7 +125,7 @@ function learn()
 			pl.Spells[spell] = true
 		end
 	end
-	return report("All skills mastered; all spells learned")
+	return report("Level 255; all skills mastered; all spells learned")
 end
 
 function immune()
