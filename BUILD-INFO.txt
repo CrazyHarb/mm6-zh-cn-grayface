@@ -44,6 +44,8 @@ Runtime verification
   arrow-key flight smoke completed with failures=0.
 - Direct ↑/wheel-up/wheel-down/↓ MMExtension events passed: Flying/InAir,
   vertical speed, pulse stop, landing and no-Fly guards all passed; failures=0.
+- Real land-to-water movement with a valid caster: engine set WaterWalkingBit,
+  Drowning stayed false and InAir stayed false on water.
 
 Offline verification
 --------------------

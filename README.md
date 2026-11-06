@@ -88,6 +88,8 @@
 
 `FlightControls.lua` 在户外且飞行术有效时直接设置原生 `Flying`、`InAir`、`FlyingBit` 和 `SpeedZ`，不依赖 PageUp 的旧条件分支。↑/滚轮向上用于起飞和上升，滚轮向下用于下降，↓ 调用原生命令 15 降落。
 
+`buff()` 还为凌波微步和飞行奇术分配有正 SP 的 1 起始队伍施法者。`WaterWalkingBit` 不是入水权限开关，而是引擎在实际站上水面后设置的派生状态；因此 Buff 不强制写这个状态位。
+
 ## 5. 控制台指令
 
 在游戏中按 **Ctrl+F1**，输入指令后按 **Ctrl+Enter**。若控制台不接收字符，先切换英文键盘。
@@ -160,6 +162,7 @@ MM6_zh_CN_GrayFace/
 - 强制装饰物高半字异常后连续进入两个地下城，计数均为 230。
 - Key33 被接受为上升动作，Key36 成功将 `Party.Flying` 从 `true` 变为 `false`。
 - 直接注入 ↑、滚轮上/下和 ↓ 的 MMExtension 事件，飞行状态、垂直速度、松开停止及降落全部通过，`failures=0`。
+- 在真实水陆边界执行原生移动，Water Walk 使用有效队伍施法者；入水后引擎设置 `WaterWalkingBit=true`，不溺水且 `InAir=false`。
 
 测试用自动新游戏、动作队列、临时角色修改和验证脚本不进入安装包；测试改写的 `autosave.mm6` 已从备份恢复。
 

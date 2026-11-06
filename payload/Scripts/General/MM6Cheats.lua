@@ -91,6 +91,20 @@ local function setBuff(b, power, expireTime)
 	b.Bits = 0
 end
 
+local function setPartyCaster(b)
+	for i = 0, 3 do
+		local pl = Party.PlayersArray[i]
+		if pl:GetFullSP() > 0 then
+			if pl.SP <= 0 then
+				pl.SP = pl:GetFullSP()
+			end
+			b.Caster = i + 1
+			return true
+		end
+	end
+	return false
+end
+
 function buff()
 	if Game.CurrentScreen ~= 0 then
 		return report("Full buffs: load a game first")
@@ -108,6 +122,8 @@ function buff()
 			setBuff(pl.SpellBuffs[id], 40, expireTime)
 		end
 	end
+	setPartyCaster(Party.SpellBuffs[const.PartyBuff.WaterWalk])
+	setPartyCaster(Party.SpellBuffs[const.PartyBuff.Fly])
 	return report("Full buffs applied for 24 game hours")
 end
 
