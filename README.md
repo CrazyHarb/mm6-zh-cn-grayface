@@ -2,7 +2,7 @@
 
 本仓库是面向《魔法门6：天堂之令》的本地交付工程。它在玩家已有的完整简体中文安装上，整合 GrayFace 2.5.7、MMExtension、DBCS 中文渲染、WASD 平移、视口中心鼠标锁定、方向键飞行、控制台指令和副本加载崩溃修复。
 
-本目录是本地创建并维护的 Git 交付仓库，未配置远端，也不是某个上游项目的直接 clone。
+本目录是本地创建并维护的 Git 交付仓库，远端为 `git@github.com:CrazyHarb/mm6-zh-cn-grayface.git`。
 
 ## 1. 适用范围与边界
 
@@ -31,6 +31,7 @@
 
 - `payload/Scripts/General/MM6Cheats.lua`：本仓库编写的控制台指令，并非上游作弊脚本复制件。
 - `payload/Scripts/General/FixDecListCount.lua`：根据 `D:\crash.dmp` 的原生异常栈编写的副本计数兼容修复。
+- `payload/Scripts/General/FlightControls.lua`：直接处理方向键和滚轮事件，修复飞行术后的起飞、上升和降落。
 - `payload/MM6.ini`：WASD、攻击/施法、飞行和其他 GrayFace 键位的本地配置。
 - `install.bat`：备份、禁用英文覆盖资源并复制 payload 的安装器。
 - `使用说明.txt`、`COMPAT-NOTES.md`、`BUILD-INFO.txt` 和本 README。
@@ -85,6 +86,8 @@
 
 “视口中心”是实际 3D 画面区域的中心，不是窗口外框中心。进入背包、对话等界面时，鼠标按原游戏规则释放。
 
+`FlightControls.lua` 在户外且飞行术有效时直接设置原生 `Flying`、`InAir`、`FlyingBit` 和 `SpeedZ`，不依赖 PageUp 的旧条件分支。↑/滚轮向上用于起飞和上升，滚轮向下用于下降，↓ 调用原生命令 15 降落。
+
 ## 5. 控制台指令
 
 在游戏中按 **Ctrl+F1**，输入指令后按 **Ctrl+Enter**。若控制台不接收字符，先切换英文键盘。
@@ -137,6 +140,7 @@ MM6_zh_CN_GrayFace/
    │  └─ General/
    │     ├─ FNT_DBCS.lua      中文 DBCS 渲染与字体引导
    │     ├─ MM6Cheats.lua     六个控制台指令
+   │     ├─ FlightControls.lua  方向键/滚轮飞行控制
    │     └─ FixDecListCount.lua 副本计数崩溃修复
    └─ ExeMods/               MMExtension 运行组件
 ```
@@ -155,6 +159,7 @@ MM6_zh_CN_GrayFace/
 - 全部 17 类 Condition 的立即清除、持续免疫及关闭恢复通过。
 - 强制装饰物高半字异常后连续进入两个地下城，计数均为 230。
 - Key33 被接受为上升动作，Key36 成功将 `Party.Flying` 从 `true` 变为 `false`。
+- 直接注入 ↑、滚轮上/下和 ↓ 的 MMExtension 事件，飞行状态、垂直速度、松开停止及降落全部通过，`failures=0`。
 
 测试用自动新游戏、动作队列、临时角色修改和验证脚本不进入安装包；测试改写的 `autosave.mm6` 已从备份恢复。
 

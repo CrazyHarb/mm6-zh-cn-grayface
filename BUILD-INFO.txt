@@ -42,6 +42,8 @@ Runtime verification
   both maps loaded with the correct count of 230 and failures=0.
 - Key33 accepted as Fly Up; Key36 changed Party.Flying from true to false;
   arrow-key flight smoke completed with failures=0.
+- Direct ↑/wheel-up/wheel-down/↓ MMExtension events passed: Flying/InAir,
+  vertical speed, pulse stop, landing and no-Fly guards all passed; failures=0.
 
 Offline verification
 --------------------
