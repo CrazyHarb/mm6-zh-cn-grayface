@@ -46,6 +46,8 @@ Runtime verification
   vertical speed, pulse stop, landing and no-Fly guards all passed; failures=0.
 - Real land-to-water movement with a valid caster: engine set WaterWalkingBit,
   Drowning stayed false and InAir stayed false on water.
+- Skill encoding: every player skill has raw value 191, SplitSkill level 63
+  and Master rank 3; all spells and level fields passed; failures=0.
 
 Offline verification
 --------------------

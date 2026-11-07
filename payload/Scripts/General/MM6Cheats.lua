@@ -128,6 +128,7 @@ function buff()
 end
 
 local maxCharacterLevel = 255
+local masterSkillValue = JoinSkill(63, const.Master)
 
 function learn()
 	for _, pl in Party.PlayersArray do
@@ -135,7 +136,7 @@ function learn()
 		pl.LevelBonus = 0
 		pl.Experience = 0
 		for skill = 0, 30 do
-			pl.Skills[skill] = const.Master
+			pl.Skills[skill] = masterSkillValue
 		end
 		for spell = 0, 99 do
 			pl.Spells[spell] = true
